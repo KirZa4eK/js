@@ -52,7 +52,7 @@
 // console.log(5%2);
 // console.log("2" ====);
 
-let money = prompt("Ваш бюджет на месяц?", ''),
+let money = +prompt("Ваш бюджет на месяц?", ''),
 	time = prompt('Введите дату в формате YYYY-MM-DD', '');
 
 let appData = {
@@ -91,5 +91,7 @@ if(appData.moneyPerDay < 100) {
     console.log("Средний уровень достатка");
 } else if (appData.moneyPerDay > 2000) {
     console.log("Высокий уровень достатка");
+} else {
+    console.log("Произошла ошибка")
 }
 
