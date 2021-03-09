@@ -1,6 +1,5 @@
 'use strict';
 
-
 let money, time;
 
 function start() {
@@ -28,9 +27,12 @@ let appData = {
                 b = prompt ("Во сколько обойдется?", "");
         
             if ( typeof(a)==='string' && typeof(a) != null && typeof(b) != null && a != "" && b != "" && a.length < 50) {
+
+                console.log("done");
                 appData.expenses[a] = b;
             } else {
-                i = i - 1;
+                console.log("bad result");
+                i--;
             }
         
         }
@@ -54,7 +56,6 @@ let appData = {
         if (appData.savings == true) {
             let save = +prompt("Какова сумма накоплений?"),
                 percent = +prompt("Под какой процент?");
-    
                 appData.monthIncome = save/100/12*percent;
                 alert("Доход с Вашего депозита в месяц: " + appData.monthIncome);
         }
@@ -62,17 +63,30 @@ let appData = {
     chooseOptExpenses: function() {
         for (let i = 1; i <= 3; i++) {
             let questionOptExpenses = prompt("Статья необязательных расходов?");
-            appData.optionalExpenses[i] = opt;
-            
+            appData.optionalExpenses[i] = questionOptExpenses;
+            console.log(appData.optionalExpenses); 
         }
     },
     chooseIncome: function() {
-        let items = prompt('Что принесет дополнительный доход? (Перечислите через запятую)', '');
-        appData.income = items.split(', ');
+        let items = prompt("Что принесет дополнительный доход? (Перечислите через запятую)", "");
+
+        if (typeof(items) != "string" || items == "" || typeof(items) == null) {
+            console.log("Вы ввели некорректные данные или не ввели их вовсе");
+        } else {
+            appData.income = items.split(", ");
+            appData.income.push(prompt("Может что-то еще?"));
+            appData.income.sort();
+        }
+
+        appData.income.forEach (function (itemmassive, i) {
+            alert("Способы доп. заработка: " + (i+1) + " - " + itemmassive);
+        });
     }
 };
 
 
-    
+for (let key in appData) {
+    console.log("Наша программа включает в себя данные: " + key + " - " + appData[key]);
+}    
 
 
